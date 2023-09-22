@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSaveRequest;
+use App\Jobs\SendWelcomeEmail;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -36,8 +37,10 @@ class UserController extends Controller
         try {
             if ($request['user_id'] !== null) {
                 $user = $this->userService->update($this->formatData($request), $request['user_id']);
+
             } else {
                 $user = $this->userService->create($this->formatData($request));
+                dispatch(new SendWelcomeEmail($user));
             }
 
             $user->interests()->sync($request['interests']);
