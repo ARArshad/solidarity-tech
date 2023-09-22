@@ -26,9 +26,7 @@ class WelcomeEmail extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * @return WelcomeEmail
      */
     public function build(): WelcomeEmail
     {
