@@ -44,25 +44,29 @@ function createOrUpdate() {
     });
 }
 
+var interestArray = [];
 function findUser(url) {
     $(".clear-error").html("");
     $.ajax({
         url: url,
         method: "get",
         success: function (response) {
+
+            console.log(response);
+            $('#interests').select2('destroy');
+
             if (response) {
                 $('#user-modal-title').text("Update User");
             }
+
             const interestIds = response.interests.map(function(interest) {
                 return interest.id;
             });
 
-            $('#interests').val(null).trigger('change');
-            interestIds.forEach(function(interestId) {
-                $('#interests option[value="' + interestId + '"]').prop('selected', true);
-            });
-
-            $('#interests').trigger('change');
+            interestArray = interestIds;
+            // $('#interests').val(null).trigger('change');
+            $('#interests').val(interestIds).trigger('change');
+            $('#interests').select2();
 
             $.each(response, function (index, value) {
                 $("#" + index).val(value);
@@ -74,6 +78,21 @@ function findUser(url) {
 
     });
 }
+
+$('#interests').on('select2:unselect', function (e) {
+    // Prevent the default behavior of clearing all selected values
+    e.preventDefault();
+    e.stopPropagation();
+    // Get the value that’s being removed
+    var removedValue = e.params.data.id;
+    // Perform custom logic to handle the removal of this value
+    const filteredArray = interestArray.filter(item => item !== parseInt(removedValue));
+    interestArray = filteredArray;
+    if(filteredArray.length > 0)
+        $('#interests').val(filteredArray).trigger('change');
+    // If you want to remove it programmatically, you can use jQuery
+    // $(this).val(null).trigger(‘change’);
+});
 
 function deleteUser(url) {
     Swal.fire({
@@ -90,7 +109,6 @@ function deleteUser(url) {
                 url: url,
                 method: "get",
                 success: function (response) {
-                    console.log(response);
                     if (response.status === 200) {
                         toastr.success("" + response.message + "", "Success");
                         getUsers();
