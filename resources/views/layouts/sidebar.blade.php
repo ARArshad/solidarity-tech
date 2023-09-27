@@ -1,6 +1,6 @@
 <div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="index.html">
+				<a href="{{url('/dashboard')}}">
 					<img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
 					<img
 						src="vendors/images/deskapp-logo-white.svg"
@@ -24,10 +24,9 @@
 								<li><a href="index.html">Dashboard style 1</a></li>
 							</ul> -->
 						</li>
-					
+
 					</ul>
 				</div>
 			</div>
 		</div>
 
-        

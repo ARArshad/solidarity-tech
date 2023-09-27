@@ -31,9 +31,9 @@ class UserService
      * @param array $with
      * @return Builder[]|Collection|mixed
      */
-    public function userList(array $columns = ['*'], array $with = []): mixed
+    public function userList(array $columns, array $with,array $email)
     {
-        return $this->userRepository->all($columns, $with);
+        return $this->userRepository->userListwithoutAdmin( $columns, $with,$email);
     }
 
     /**

@@ -67,9 +67,16 @@
                                     <div class="form-group">
                                         <label>Select Language</label>
                                         <select class="form-control" id="language" name="language">
+                                            <option value="">Select Language</option>
                                             <option value="English">English</option>
-                                            <option value="Urdu">Urdu</option>
-                                            <option value="Punjabi">Punjabi</option>
+                                            <option value="French">French</option>
+                                            <option value="Spanish">Spanish</option>
+                                            <option value="German">German</option>
+                                            <option value="Arabic">Arabic</option>
+                                            <option value="Chinese">Chinese</option>
+                                            <option value="Korean">Korean</option>
+                                            <option value="Japanese">Japanese</option>
+                                            <option value="Russian">Russian</option>
                                         </select>
                                         <small class="text-danger clear-error" id="language_error"></small>
                                     </div>

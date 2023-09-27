@@ -64,8 +64,8 @@ class UserController extends Controller
     public function userList(Request $request)
     {
         if ($request->ajax()) {
-            $userList = $this->userService->userList(with: ['interests']);
 
+            $userList = $this->userService->userList(['*'], ['interests'], ['admin@gmail.com']);
             return Datatables::of($userList)
                 ->addIndexColumn()
                 ->addColumn('action', function ($userList) {

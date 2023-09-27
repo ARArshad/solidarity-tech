@@ -18,4 +18,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         parent::__construct($user);
     }
+
+    public function userListwithoutAdmin($columns, $with, $email): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return $this->model
+            ->with($with)
+            ->whereNotIn('email', $email)
+            ->get($columns);
+    }
 }
