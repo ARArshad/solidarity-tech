@@ -44,7 +44,6 @@ class UserController extends Controller
             }
 
             $user->interests()->sync($request['interests']);
-
             return response()->json([
                 'status' => 200,
                 'message' => 'User Saved Successfully'
